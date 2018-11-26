@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
 import { Link} from 'react-router-dom';
-import HomePage from '../components/Home/Home';
-import TodoListPage from '../pages/TodoListPage';
-
+import Routes from './Routes';
 
 const { Header, Content, Footer } = Layout;
 
@@ -18,19 +16,21 @@ class AppLayout extends Component {
                     <Menu
                         theme="dark"
                         mode="horizontal"
-                        defaultSelectedKeys={['/']}
+                        defaultSelectedKeys={[window.location.pathname]}
                         style={{ lineHeight: '64px' }}
                     >
                         <Menu.Item key="/">
-                            <a href="/">Home</a>
+                            <Link to="/">Home</Link>
                         </Menu.Item>
                         <Menu.Item key="/todolist">
-                            <a href="/todolist">Todo List</a>
+                            <Link to="/todolist">Todo List</Link>
                         </Menu.Item>                       
                     </Menu>
                 </Header>
                 <Content style={{ padding: '0 50px' }}>
-                    <div style={{ background: '#fff', padding: 24, minHeight: 750, marginTop:20 }}><TodoListPage/></div>
+                    <div style={{ background: '#fff', padding: 24, minHeight: 750, marginTop:20 }}>
+                        <Routes/>
+                    </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
                     Ant Design ©2018 Created by Ant UED
