@@ -5,19 +5,24 @@ class TaskDetail extends Component {
       taskDetail: this.props.taskData
     };
     componentDidMount(){
-        console.log(this.state);
         this.props.requestTaskDetail();
-        console.log(this.state.taskDetail);
     }
-    componentDidUpdate(){
-        // this.setState({
-        //     taskId: this.props.taskId, 
-        //     taskName: this.props.taskName,
-        //     taskDescription: this.props.taskDescription
-        // });
+
+    componentWillReceiveProps = (prevProps, currProps) => {
+        this.setState({
+            taskDetail: prevProps.taskData,
+        });
+        console.log(prevProps.taskData);
+    }
+    updateTask = () => {
+       this.props.updateTaskDetail(this.state.taskDetail);
+    }
+    handleChange = (event) => {
+        var taskDetail = {...this.state.taskDetail};
+        taskDetail.beatDescription = event.target.value;
+        this.setState({taskDetail});
     }
     render(){
-       
         return (
             <div style={{padding:"10px"}}>
                 <table>
@@ -29,12 +34,13 @@ class TaskDetail extends Component {
                     </tr>
                     <tr>
                         <td>
-                            <textarea defaultValue={this.state.taskDetail.beatDescription}></textarea>
+                            <textarea value={this.state.taskDetail.beatDescription}
+                            onChange={this.handleChange}  cols={40} rows={7}></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td style={{float:"left"}}>
-                            <button>Save</button>
+                            <button onClick={this.updateTask}>Save</button>
                         </td>
                         <td style={{float:"left"}}>
                             <button>Cancel</button>

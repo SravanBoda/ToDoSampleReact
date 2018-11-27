@@ -14,6 +14,10 @@ const taskListReducer = (state = intialState, action) => {
         case actionTypes.RCV_TASKS:
             return {
                 ...state, isLoading: false, data: action.payload
+            };
+        case actionTypes.VEW_TASK:
+            return {
+                ...state, isLoading: false, task: action.payload
             }    
         default: return state;
     }

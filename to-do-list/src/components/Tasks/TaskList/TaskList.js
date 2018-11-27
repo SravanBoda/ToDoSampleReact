@@ -1,29 +1,29 @@
 import React, {Component} from 'react';
 import { Table, Button } from 'antd';
-const tasks = [{
-    key: 1,
-    beatId: 1,
-    beatName: 'Task 1',
-    beatDescription: 'Break fast is ready',
-  },
-  {
-    key: 2,
-    beatId: 2,
-    beatName: 'Task 2',
-    beatDescription: 'Lunch is not available'
-  },
-  {
-    key: 3,
-    beatId: 3,
-    beatName: 'Task 3',
-    beatDescription: 'Snacks are just started'
-},
-{
-    key : 4,
-    beatId: 4,
-    beatName: 'Task 4',
-    beatDescription: 'Dinner is on the way'
-}]; 
+// const tasks = [{
+//     key: 1,
+//     beatId: 1,
+//     beatName: 'Task 1',
+//     beatDescription: 'Break fast is ready',
+//   },
+//   {
+//     key: 2,
+//     beatId: 2,
+//     beatName: 'Task 2',
+//     beatDescription: 'Lunch is not available'
+//   },
+//   {
+//     key: 3,
+//     beatId: 3,
+//     beatName: 'Task 3',
+//     beatDescription: 'Snacks are just started'
+// },
+// {
+//     key : 4,
+//     beatId: 4,
+//     beatName: 'Task 4',
+//     beatDescription: 'Dinner is on the way'
+// }]; 
 export default class TaskList extends Component {
     columns = [
         {
@@ -52,9 +52,9 @@ export default class TaskList extends Component {
     ];
     
        
-     viewTask = (beatId) => {
-        console.log(beatId);
-    }
+    // viewTask = (beatId) => {
+    //     console.log(beatId);
+    // }
     state = {
         taskList: this.props.tasks,
         selectedRowKeys: [],
@@ -63,13 +63,17 @@ export default class TaskList extends Component {
     componentDidMount(){
         this.props.requestTasks();
     }
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if(prevProps.isLoading ===true && this.props.isLoading === false) {
             this.setState({taskList: this.props.tasks});
         }
     }
     onSelectChange = (selectedRowKeys) => {
         this.setState({selectedRowKeys});
+    }
+
+    viewTask = (record) => {
+            this.props.viewTask(record);
     }
     render(){
         const {selectedRowKeys} = this.state;
@@ -94,7 +98,7 @@ export default class TaskList extends Component {
                 <Table dataSource ={this.state.taskList} columns={this.columns} rowSelection={rowSelection} style={{width:"100%"}}
                 onRow={(record) =>{
                     return {
-                        onClick:() => { console.log(record);}
+                        onClick:() => { this.viewTask(record);}
                     }
                 }
                 }/>               
