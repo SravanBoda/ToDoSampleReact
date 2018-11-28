@@ -18,7 +18,11 @@ const taskListReducer = (state = intialState, action) => {
         case actionTypes.VEW_TASK:
             return {
                 ...state, isLoading: false, task: action.payload
-            }    
+            };
+        case actionTypes.ADD_TASKDETAIL:
+            return {
+                ...state, isLoading: false, data: action.payload
+            }      
         default: return state;
     }
 }

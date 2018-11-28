@@ -1,7 +1,7 @@
 import {bindActionCreators} from 'redux';
 import TaskList from './TaskList';
 import {connect} from 'react-redux';
-import {requestTasks, viewTask} from '../../../redux/Tasks/TaskList/actions';
+import {requestTasks, viewTask,addTaskDetail} from '../../../redux/Tasks/TaskList/actions';
 
 const mapsStoreToProps = (store) =>{
     return{
@@ -11,7 +11,7 @@ const mapsStoreToProps = (store) =>{
 }
 
 const mapActionsToProps = dispatch => bindActionCreators({
-    requestTasks, viewTask
+    requestTasks, viewTask,addTaskDetail
 },dispatch);
 
 export default connect(mapsStoreToProps, mapActionsToProps)(TaskList);
