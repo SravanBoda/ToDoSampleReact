@@ -16,6 +16,7 @@ class TaskDetail extends Component {
     }
     updateTask = () => {
        this.props.updateTaskDetail(this.state.taskDetail);
+        setTimeout(1000, this.props.requestTasks());
     }
     handleChange = (event) => {
         var taskDetail = {...this.state.taskDetail};
